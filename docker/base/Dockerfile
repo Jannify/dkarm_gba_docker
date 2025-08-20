@@ -15,10 +15,12 @@ RUN wget https://apt.devkitpro.org/install-devkitpro-pacman \
     && ./install-devkitpro-pacman \
     && rm ./install-devkitpro-pacman
 
-# Fix the missing /etc/mtab and then sync dkp pacman and install packages
-RUN ln -s /proc/mounts /etc/mtab && \
-    dkp-pacman -Sy && \
-    dkp-pacman -S --noconfirm gba-dev
+# Fix the missing /etc/mtab, ignore errors
+RUN ln -s /proc/mounts /etc/mtab; exit 0
+# sync dkp pacman
+RUN dkp-pacman -Sy
+# install packages
+RUN dkp-pacman -S --noconfirm gba-dev
 
 # set devkitpro variables
 ARG DKP_TOOLS_PATH=$DEVKITPRO/tools/bin
