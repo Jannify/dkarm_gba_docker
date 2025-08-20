@@ -1,3 +1,4 @@
 #!/bin/sh
-chown -R $(id -u):$(id -g) /source
+chmod -R 777 /source
 exec "$@"
+chmod -R 777 /source
