@@ -41,7 +41,7 @@ To open a shell inside the container with the current directory mounted:
 ### Opening a Shell in Your Project
 
 ```sh
-docker run -it --rm -v $(pwd):/source --user "$(id -u):$(id -g)" dkarm_base:local -l -c bash
+make compile-base CMD="bash"
 ```
 
 ## Examples
@@ -51,7 +51,7 @@ docker run -it --rm -v $(pwd):/source --user "$(id -u):$(id -g)" dkarm_base:loca
 To build [duster](https://github.com/redthing1/duster) with the Dusk flavor:
 
 ```sh
-docker run -it --rm -v $(pwd):/source dkarm_dusk:local -l -c "pushd . && git submodule update --init --recursive && cd src/DusterGBA && make clean && make build && popd"
+make compile-dusk CMD="pushd . && git submodule update --init --recursive && cd src/DusterGBA && make clean && make build && popd"
 ```
 
 ### Celeste classic
@@ -59,12 +59,12 @@ docker run -it --rm -v $(pwd):/source dkarm_dusk:local -l -c "pushd . && git sub
 To build the [Celeste Classic](https://github.com/JeffRuLz/Celeste-Classic-GBA) homebrew ROM:
 
 ```sh
-docker run -it --rm -v $(pwd):/source --user "$(id -u):$(id -g)" dkarm_base:local -l -c "make"
+make compile-base CMD="make"
 ```
 
 ### Varoom3D from Butano
 
 To build [Varoom3D](https://github.com/GValiente/butano) with the Dusk flavor:
 ```sh
-docker run -it --rm -v $(pwd):/source --user "$(id -u):$(id -g)" -e LIBBUTANOABS=/source/butano dkarm_dusk:local -l -c "cd /source/games/varooom-3d/ && make -j2"
+make compile-dusk CMD="cd /source/games/varooom-3d/ && make -j2"
 ```
