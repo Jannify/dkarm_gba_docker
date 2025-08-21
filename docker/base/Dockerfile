@@ -15,7 +15,7 @@ RUN wget https://apt.devkitpro.org/install-devkitpro-pacman \
     && ./install-devkitpro-pacman \
     && rm ./install-devkitpro-pacman
 
-# Fix the missing /etc/mtab, ignore errors
+# Fix the missing /etc/mtab, ignore errors (for example: when already existing)
 RUN ln -s /proc/mounts /etc/mtab; exit 0
 # sync dkp pacman
 RUN dkp-pacman -Sy
@@ -29,7 +29,7 @@ ENV DKP_TOOLS_PATH=$DKP_TOOLS_PATH
 WORKDIR /source
 
 # Add the entrypoint script to the Docker image
-COPY entrypoint.sh /entrypoint.sh
+COPY docker/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 # Set the entrypoint to the script
